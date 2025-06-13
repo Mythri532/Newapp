@@ -15,7 +15,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh 'kubectl apply -f thapim-keycloak-deployment.yaml'
-                sh 'kubectl apply -f thapim-mariadb-deployment.yaml'
+                sh 'kubectl apply -f thapim-keycloak-service.yaml'
             }
         }
     }
