@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thapim-mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thapim-mariadb
+  template:
+    metadata:
+      labels:
+        app: thapim-mariadb
+    spec:
+      containers:
+      - name: app
+        image: mariadb:10.11.8
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: "true"
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: password
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: username
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: efs-pv-mariadb
+#        resources:
+ #           requests:
+  #            cpu: 4000m
+   #           memory: 8Gi
+    #          ephemeral-storage: 100Gi
+     #       limits:
+      #        cpu: 4000m
+       #       memory: 8Gi
+        #      ephemeral-storage: 100Gi
+      volumes:
+      - name: efs-pv-mariadb
+        persistentVolumeClaim:
+          claimName: efs-pvc-mariadb
