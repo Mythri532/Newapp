@@ -32,7 +32,7 @@ spec:
             - name: KC_DB_USERNAME
               value: "root"  # consider using "keycloak" instead of "root" for better practice
             - name: KC_DB_URL_DATABASE
-              value: "keycloak_3ie_gw2"
+              value: "keycloak"
             - name: KC_DB_PASSWORD
               value: "Thbs123!"
             - name: KC_DB_URL_HOST
