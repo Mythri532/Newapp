@@ -44,7 +44,7 @@ spec:
             - name: KC_HOSTNAME
               value: "35.179.135.117:31100"
             - name: KEYCLOAK_HTTPS_REQUIRED
-              value: "false"
+              value: "none"
             - name: KC_HTTP_ENABLED
               value: "true"
             - name: KC_HOSTNAME_STRICT_HTTPS
