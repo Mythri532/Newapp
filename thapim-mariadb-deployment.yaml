@@ -31,18 +31,10 @@ spec:
               name: mariadb-secret
               key: username
         volumeMounts:
-          - mountPath: /var/lib/mysql
-            name: efs-pv-mariadb
-#        resources:
- #           requests:
-  #            cpu: 4000m
-   #           memory: 8Gi
-    #          ephemeral-storage: 100Gi
-     #       limits:
-      #        cpu: 4000m
-       #       memory: 8Gi
-        #      ephemeral-storage: 100Gi
+        - name: mariadb-data
+          mountPath: /var/lib/mysql
       volumes:
-      - name: efs-pv-mariadb
-        persistentVolumeClaim:
-          claimName: efs-pvc-mariadb
+      - name: mariadb-data
+        hostPath:
+          path: /data/thapim-mariadb
+          type: DirectoryOrCreate
