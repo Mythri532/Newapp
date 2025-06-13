@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: 007684563456.dkr.ecr.eu-west-1.amazonaws.com/thapimv3.8:v3.8R_PORTAL_WITH_JAVA_THREE
+          image: 004537899190.dkr.ecr.eu-west-1.amazonaws.com/thapimv3.8:v3.8_KEYCLOAK_RHEL_WITH_JAVA
           args: ["start-dev"]
           ports:
             - containerPort: 8080
