@@ -14,8 +14,8 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
+                sh 'kubectl apply -f thapim-mariadb-deployment.yaml'
+                sh 'kubectl apply -f thapim-mariadb-service.yaml'
             }
         }
     }
