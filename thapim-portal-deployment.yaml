@@ -32,4 +32,4 @@ spec:
        #       memory: 8Gi
         #      ephemeral-storage: 100Gi
       imagePullSecrets:
-      - name: thapim
+      - name: thapim1
