@@ -5,7 +5,7 @@ metadata:
   namespace: default
 data:
   ENV_PORTAL_portalExposurePath: "http://localhost:8080/thapim"
-  ENV_PORTAL_MARIADB_DATABASE_URL: "jdbc:mariadb://thapim-mariadb/thapim_3ie_gw2"
+  ENV_PORTAL_MARIADB_DATABASE_URL: "jdbc:mariadb://thapim-mariadb/thapim"
   ENV_PORTAL_MARIADB_PASSWORD: "uZyldpCEK1Re6xQag7IWWLqTHLmt7l0/4S+/rb2UskE="
   ENV_PORTAL_REAL_TIME_STATISTICS_ENABLED: "true"
   ENV_PORTAL_REAL_TIME_STATISTICS_RETENTION_PERIOD: "365"
