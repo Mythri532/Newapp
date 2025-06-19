@@ -2,54 +2,66 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: thapim-keycloak
-  labels:
-    app: keycloak
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: keycloak
+      app: thapim-keycloak
   template:
     metadata:
       labels:
-        app: keycloak
-    spec:
+        app: thapim-keycloak
+    spec: 
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dmapim
+                operator: In
+                values:
+                - "keycloak"
       containers:
-        - name: keycloak
-          image: 004537899190.dkr.ecr.eu-west-1.amazonaws.com/thapimv3.8:v3.8_KEYCLOAK_RHEL_WITH_JAVA
-          args: ["start-dev"]
-          ports:
-            - containerPort: 8080
-          env:
-            - name: KEYCLOAK_ADMIN
-              value: "admin"
-            - name: KEYCLOAK_ADMIN_PASSWORD
-              value: "admin"
-
-            # HTTP / Proxy Settings
-            - name: KC_HTTP_ENABLED
-              value: "true"
-            - name: KC_PROXY
-              value: "edge"
-            - name: KC_HOSTNAME
-              value: "35.179.135.117:31100"
-            - name: KC_HOSTNAME_STRICT
-              value: "false"
-            - name: KC_HOSTNAME_STRICT_HTTPS
-              value: "false"
-
-            # Database Settings
-            - name: KC_DB
-              value: "mariadb"
-            - name: KC_DB_USERNAME
-              value: "keycloak"
-            - name: KC_DB_PASSWORD
-              value: "Thbs123!"
-            - name: KC_DB_URL_HOST
-              value: "thapim-mariadb"
-            - name: KC_DB_URL_PORT
-              value: "3306"
-            - name: KC_DB_URL_DATABASE
-              value: "keycloak"
+      - name: app
+        image: 004537899190.dkr.ecr.eu-west-1.amazonaws.com/thapimv3.8:v3.8_KEYCLOAK_RHEL_WITH_JAVA
+        args: ["start-dev"]
+        ports:
+        - containerPort: 8080
+        env:
+        - name: KEYCLOAK_ADMIN
+          value: "admin"
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: "admin"
+        - name: KC_PROXY
+          value: "edge"
+        - name: KC_HOSTNAME_STRICT
+          value: "false"
+        - name: KC_DB
+          value: "mariadb"
+        - name: KC_DB_USERNAME
+          value: "root" #keycloak
+        - name: KC_DB_URL_DATABASE
+          value: "keycloak"
+        - name: KC_DB_PASSWORD
+          value: "Thbs123!"
+        - name: KC_DB_URL_HOST
+          value: "thapim-mariadb"
+        - name: KC_DB_URL_PORT
+          value: "3306"
+        - name: KEYCLOAK_HTTP_PORT
+          value: "8080"
+        - name: KC_HOSTNAME
+          value: "18.132.195.51:31100"
+          #value: "localhost:3005"
+        - name: KEYCLOAK_HTTPS_REQUIRED
+          value: "false"
+        - name: KC_HTTP_ENABLED
+          value: "true"
+        - name: KC_HOSTNAME_STRICT_HTTPS
+          value: "false"
+        - name: KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_SUPPRESS_LOGOUT_CONFIRMATION_SCREEN
+          value: "true"
       imagePullSecrets:
-        - name: thapim
+      - name: thapim
+
+
