@@ -14,8 +14,10 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f thapim-keycloak-deployment.yaml'
-                sh 'kubectl apply -f thapim-keycloak-service.yaml'
+                sh 'kubectl apply -f secret-portalProperties.yaml'
+                sh 'kubectl apply -f configMap-portalProperties.yaml'
+                sh 'kubectl apply -f thapim-portal-deployment.yaml'
+                sh 'kubectl apply -f thapim-portal-service.yaml'
             }
         }
     }
