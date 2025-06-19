@@ -11,16 +11,7 @@ spec:
     metadata:
       labels:
         app: thapim-keycloak
-    spec: 
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: dmapim
-                operator: In
-                values:
-                - "keycloak"
+    spec:
       containers:
       - name: app
         image: 004537899190.dkr.ecr.eu-west-1.amazonaws.com/thapimv3.8:v3.8_KEYCLOAK_RHEL_WITH_JAVA
